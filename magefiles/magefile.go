@@ -391,8 +391,10 @@ func build(debug bool) error {
 	}
 
 	execName := "trivy"
+	gcflags := ""
 	if debug {
 		execName = "trivy-debug"
+		gcflags = "-gcflags=all=-N -l"
 	}
 
 	ldflags, err := buildLdflags(debug)
@@ -404,7 +406,7 @@ func build(debug bool) error {
 		return err
 	}
 	return sh.RunWith(ENV, "go", "build", "-o", execName, "-ldflags", ldflags,
-		filepath.Join(wd, "cmd", "trivy"))
+		gcflags, filepath.Join(wd, "cmd", "trivy"))
 }
 
 // Install installs Trivy
