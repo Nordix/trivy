@@ -32,6 +32,7 @@ type artifact struct {
 	Relationship ftypes.Relationship
 
 	Locations ftypes.Locations
+	FilePath  string
 }
 
 func newArtifact(groupID, artifactID, version string, licenses []string, props map[string]string) artifact {
